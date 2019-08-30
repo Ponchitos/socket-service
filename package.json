@@ -1,0 +1,43 @@
+{
+  "name": "socket_test_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docker:db:test:start": "./tools/scripts/docker/docker-mongodb-test-start.sh",
+    "docker:db:test:stop": "./tools/scripts/docker/docker-mongodb-test-stop.sh",
+    "test:db:mongo:user": "npm run docker:db:test:stop && npm run docker:db:test:start && npm run test:repository:user",
+    "test:db:mongo:chat": "npm run docker:db:test:stop && npm run docker:db:test:start && npm run test:repository:chat",
+    "test:db:mongo:message": "npm run docker:db:test:stop && npm run docker:db:test:start && npm run test:repository:message",
+    "test:unit:models": "jest build/__tests__/unit/model",
+    "test:repository:user": "jest build/__tests__/unit/repositories/mongodb/userRepository.test.js",
+    "test:repository:chat": "jest build/__tests__/unit/repositories/mongodb/chatRepository.test.js",
+    "test:repository:message": "jest build/__tests__/unit/repositories/mongodb/messageRepository.test.js",
+    "prettier:base": "prettier --parser typescript --single-quote",
+    "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.10",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.1",
+    "@types/jest": "^24.0.18",
+    "@types/mongoose": "^5.5.13",
+    "@types/socket.io": "^2.1.2",
+    "@types/socket.io-client": "^1.4.32",
+    "@types/uuid": "^3.4.5",
+    "jest": "^24.9.0",
+    "prettier": "1.18.2",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
+  }
+}
