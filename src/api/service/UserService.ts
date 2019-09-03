@@ -23,7 +23,7 @@ export default class UserService {
 
   async create(data: IUserReqCreate): Promise<User> {
     const user: User = new User({
-      email: data.role,
+      email: data.email,
       password: data.password,
       role: data.role
     });
@@ -41,7 +41,7 @@ export default class UserService {
 
   async findAll(): Promise<Array<User>> {
     const result: Array<User> = await this._repository.findAll();
-    this._logger.info({ action: 'user service: find all', result });
+    this._logger.info({ action: 'user service: find all', result: result.length });
 
     return result;
   }
@@ -51,7 +51,7 @@ export default class UserService {
     this._logger.info({
       action: 'user service: find by uuid',
       data: uuid,
-      result
+      result: result != null ? result.toString() : null
     });
 
     return result;
@@ -62,7 +62,7 @@ export default class UserService {
     this._logger.info({
       action: 'user service: find by email',
       data: email,
-      result
+      result: result != null ? result.toString() : null
     });
 
     return result;

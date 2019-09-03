@@ -13,6 +13,8 @@
     "test:repository:user": "jest build/__tests__/unit/repositories/mongodb/userRepository.test.js",
     "test:repository:chat": "jest build/__tests__/unit/repositories/mongodb/chatRepository.test.js",
     "test:repository:message": "jest build/__tests__/unit/repositories/mongodb/messageRepository.test.js",
+    "test:service:user": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/userService.test.js",
+    "test:service:chat": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/chatService.test.js",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
@@ -25,7 +27,8 @@
     "mongoose": "^5.6.10",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
@@ -35,6 +38,7 @@
     "@types/socket.io": "^2.1.2",
     "@types/socket.io-client": "^1.4.32",
     "@types/uuid": "^3.4.5",
+    "@types/winston": "^2.4.4",
     "jest": "^24.9.0",
     "prettier": "1.18.2",
     "ts-jest": "^24.0.2",
