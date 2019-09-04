@@ -15,6 +15,7 @@
     "test:repository:message": "jest build/__tests__/unit/repositories/mongodb/messageRepository.test.js",
     "test:service:user": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/userService.test.js",
     "test:service:chat": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/chatService.test.js",
+    "test:service:message": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/messageService.test.js",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""

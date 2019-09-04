@@ -41,7 +41,10 @@ export default class UserService {
 
   async findAll(): Promise<Array<User>> {
     const result: Array<User> = await this._repository.findAll();
-    this._logger.info({ action: 'user service: find all', result: result.length });
+    this._logger.info({
+      action: 'user service: find all',
+      result: result.length
+    });
 
     return result;
   }
