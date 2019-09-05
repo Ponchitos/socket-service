@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-import Chat from '../../../api/model/Chat';
+import Chat from '../../../api/models/Chat';
 import { IChat } from '../models/chat';
 import IChatRepository from '../../../api/repositories/ChatRepository';
 

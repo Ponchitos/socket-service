@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import ChatMongoRepository from '../../../../database/mongodb/repository/ChatRepository';
 import ChatSchema from '../../../../database/mongodb/models/chat';
-import Chat from '../../../../api/model/Chat';
-import User from '../../../../api/model/User';
+import Chat from '../../../../api/models/Chat';
+import User from '../../../../api/models/User';
 
 async function createUser(): Promise<User> {
   const user: User = new User({

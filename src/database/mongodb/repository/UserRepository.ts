@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-import User from '../../../api/model/User';
+import User from '../../../api/models/User';
 import { IUser } from '../models/user';
 import IUserRepository from '../../../api/repositories/UserRepository';
 

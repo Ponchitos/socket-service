@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import MessageMongoRepository from '../../../../database/mongodb/repository/MessageRepository';
 import MessageSchema from '../../../../database/mongodb/models/message';
-import Message from '../../../../api/model/Message';
-import User from '../../../../api/model/User';
-import Chat from '../../../../api/model/Chat';
+import Message from '../../../../api/models/Message';
+import User from '../../../../api/models/User';
+import Chat from '../../../../api/models/Chat';
 
 let repository: MessageMongoRepository;
 let uuidUser: string;

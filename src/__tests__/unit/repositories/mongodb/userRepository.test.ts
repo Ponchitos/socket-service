@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import UserMongoRepository from '../../../../database/mongodb/repository/UserRepository';
 import UserSchema from '../../../../database/mongodb/models/user';
-import User from '../../../../api/model/User';
+import User from '../../../../api/models/User';
 
 let repository: UserMongoRepository;
 let uuid: string;

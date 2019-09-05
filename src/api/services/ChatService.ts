@@ -1,5 +1,5 @@
 import IChatRepository from '../repositories/ChatRepository';
-import Chat from '../model/Chat';
+import Chat from '../models/Chat';
 
 export interface IChatService {
   repository: IChatRepository;

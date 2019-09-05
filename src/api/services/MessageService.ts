@@ -1,5 +1,5 @@
 import IMessageRepository from '../repositories/MessageRepository';
-import Message from '../model/Message';
+import Message from '../models/Message';
 
 export interface IMessageService {
   repository: IMessageRepository;

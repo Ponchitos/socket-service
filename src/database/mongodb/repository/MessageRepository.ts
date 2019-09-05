@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-import Message from '../../../api/model/Message';
+import Message from '../../../api/models/Message';
 import { IMessage } from '../models/message';
 import IMessageRepository from '../../../api/repositories/MessageRepository';
 

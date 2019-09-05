@@ -1,4 +1,4 @@
-import User from '../../../api/model/User';
+import User from '../../../api/models/User';
 
 describe('User tests', () => {
   let user: User;

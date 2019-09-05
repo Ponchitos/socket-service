@@ -1,4 +1,4 @@
-import Message from '../model/Message';
+import Message from '../models/Message';
 
 export default interface IMessageRepository {
   create(message: Message): Promise<Message>;

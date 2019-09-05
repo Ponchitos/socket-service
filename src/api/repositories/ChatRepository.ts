@@ -1,4 +1,4 @@
-import Chat from '../model/Chat';
+import Chat from '../models/Chat';
 
 export default interface IChatRepository {
   create(chat: Chat): Promise<Chat>;

@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import UserService from '../../../api/service/UserService';
+import UserService from '../../../api/services/UserService';
 import UserMongoRepository from '../../../database/mongodb/repository/UserRepository';
 import UserSchema from '../../../database/mongodb/models/user';
 import logger from '../../../logger';
-import User from '../../../api/model/User';
+import User from '../../../api/models/User';
 
 let service: UserService;
 let uuid: string;

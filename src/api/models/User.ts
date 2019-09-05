@@ -59,7 +59,10 @@ export default class User {
     this._passwordHash = await bcrypt.hash(this._password, this._passwordSalt);
   }
 
-  comparePassword(password: string): Promise<boolean> {
+  async comparePassword(password: string): Promise<boolean> {
+    if (this.tempPassword === password) {
+      return true;
+    }
     return bcrypt.compare(password, this._passwordHash);
   }
 
