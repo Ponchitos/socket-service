@@ -1,0 +1,63 @@
+{
+  "POST": {
+    "signup": {
+      "description": "signup",
+      "params": {},
+      "headers": {},
+      "request": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "required": ["email", "password", "role"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "temp_password": {
+                "type": "string"
+              }
+            },
+            "required": ["temp_password"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["statusCode", "data"],
+        "additionalProperties": false
+      }
+    },
+    "signin": {
+      "description": "signin",
+      "params": {},
+      "headers": {},
+      "request": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["email", "password"],
+        "additionalProperties": false
+      }
+    }
+  }
+}

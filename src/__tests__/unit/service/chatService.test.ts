@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import ChatService from '../../../api/services/ChatService';
 import ChatMongoRepository from '../../../database/mongodb/repository/ChatRepository';
 import ChatSchema from '../../../database/mongodb/models/chat';
-import logger from '../../../logger';
+import logger from '../../../logger/winston';
 import Chat from '../../../api/models/Chat';
 import User from '../../../api/models/User';
 

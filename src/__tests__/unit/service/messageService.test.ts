@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import MessageService from '../../../api/services/MessageService';
 import MessageMongoRepository from '../../../database/mongodb/repository/MessageRepository';
 import MessageSchema from '../../../database/mongodb/models/message';
-import logger from '../../../logger';
+import logger from '../../../logger/winston';
 import Chat from '../../../api/models/Chat';
 import User from '../../../api/models/User';
 import Message from '../../../api/models/Message';

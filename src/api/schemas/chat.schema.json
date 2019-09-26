@@ -1,0 +1,175 @@
+{
+  "POST": {
+    "create": {
+      "description": "create chat",
+      "params": {},
+      "headers": {},
+      "request": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "userUuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "userUuid", "description"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "chat": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "dateCreate": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "user", "chat", "description", "dateCreate"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["statusCode", "data"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "GET": {
+    "/": {
+      "description": "get chat by user uuid and chat uuid",
+      "params": {
+        "user": {
+          "type": "string"
+        },
+        "chat": {
+          "type": "string"
+        }
+      },
+      "headers": {},
+      "request": {},
+      "response": {
+        "type": "object",
+        "statusCode": {
+          "type": "string"
+        },
+        "data": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "chat": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "dateCreate": {
+                  "type": "string"
+                }
+              },
+              "required": ["name", "user", "chat", "description", "dateCreate"],
+              "additionalProperties": false
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "user": {
+                    "type": "string"
+                  },
+                  "chat": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "dateCreate": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "user", "chat", "description", "dateCreate"],
+                "additionalProperties": false
+              }
+            }
+          ]
+        },
+        "required": ["statusCode", "data"],
+        "additionalProperties": false
+      }
+    },
+    "all": {
+      "description": "get all chats",
+      "params": {},
+      "headers": {},
+      "request": {},
+      "response": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "chat": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "dateCreate": {
+                  "type": "string"
+                }
+              },
+              "required": ["name", "user", "chat", "description", "dateCreate"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["statusCode", "data"],
+        "additionalProperties": false
+      }
+    }
+  }
+}

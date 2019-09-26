@@ -1,0 +1,24 @@
+sudo: required
+dist: bionic
+os: linux
+language: node_js
+node_js: 10.14.1
+services:
+  - docker
+
+before_script:
+  - npm install
+  - tsc
+
+jobs:
+  include:
+    - stage: unit test
+      script:
+        - npm run test:unit:models
+        - npm run test:repository:user
+        - npm run test:repository:chat
+        - npm run test:repository:message
+        - npm run test:service:user
+        - npm run test:service:chat
+        - npm run test:service:message
+
