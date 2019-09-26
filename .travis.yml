@@ -14,11 +14,5 @@ jobs:
   include:
     - stage: unit test
       script:
-        - npm run test:unit:models
-        - npm run test:repository:user
-        - npm run test:repository:chat
-        - npm run test:repository:message
-        - npm run test:service:user
-        - npm run test:service:chat
-        - npm run test:service:message
+        - npm run test:unit
 
