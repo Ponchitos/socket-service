@@ -56,14 +56,12 @@
   },
   "GET": {
     "/": {
-      "description": "get chat by user uuid and chat uuid",
+      "description": "get chat by user uuid",
       "params": {
         "user": {
           "type": "string"
         },
-        "chat": {
-          "type": "string"
-        }
+        "required": ["user"]
       },
       "headers": {},
       "request": {},
@@ -73,58 +71,35 @@
           "type": "string"
         },
         "data": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "chat": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "dateCreate": {
-                  "type": "string"
-                }
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
               },
-              "required": ["name", "user", "chat", "description", "dateCreate"],
-              "additionalProperties": false
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "user": {
-                    "type": "string"
-                  },
-                  "chat": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "dateCreate": {
-                    "type": "string"
-                  }
-                },
-                "required": ["name", "user", "chat", "description", "dateCreate"],
-                "additionalProperties": false
+              "user": {
+                "type": "string"
+              },
+              "chat": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "dateCreate": {
+                "type": "string"
               }
-            }
-          ]
+            },
+            "required": [
+              "name",
+              "user",
+              "chat",
+              "description",
+              "dateCreate"
+            ],
+            "additionalProperties": false
+          }
         },
         "required": ["statusCode", "data"],
         "additionalProperties": false
@@ -165,6 +140,49 @@
               "required": ["name", "user", "chat", "description", "dateCreate"],
               "additionalProperties": false
             }
+          }
+        },
+        "required": ["statusCode", "data"],
+        "additionalProperties": false
+      }
+    },
+    "chat": {
+      "description": "get chat by chat uuid",
+      "params": {
+        "chat": {
+          "type": "string"
+        },
+        "required": ["chat"]
+      },
+      "headers": {},
+      "request": {},
+      "response": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "chat": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "dateCreate": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "user", "chat", "description", "dateCreate"],
+            "additionalProperties": false
           }
         },
         "required": ["statusCode", "data"],

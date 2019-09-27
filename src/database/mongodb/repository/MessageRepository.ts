@@ -21,53 +21,42 @@ export default class MessageMongoRepository implements IMessageRepository {
     return message;
   }
 
-  async findByChat(chat: string): Promise<Array<Message> | null> {
-    const dbResult: Array<IMessage> | null = await this._model.find({ chat });
-    if (dbResult != null) {
-      return dbResult.map<Message>(
-        message =>
-          new Message({
-            user: message.user,
-            chat: message.chat,
-            message: message.message,
-            date: message.date
-          })
-      );
-    }
-    return null;
+  async findByChat(chat: string): Promise<Array<Message>> {
+    const dbResult: Array<IMessage> = await this._model.find({ chat });
+    return dbResult.map<Message>(
+      message =>
+        new Message({
+          user: message.user,
+          chat: message.chat,
+          message: message.message,
+          date: message.date
+        })
+    );
   }
 
-  async findByDate(date: Date): Promise<Array<Message> | null> {
-    const dbResult: Array<IMessage> | null = await this._model.find({ date });
-    if (dbResult != null) {
-      return dbResult.map<Message>(
-        message =>
-          new Message({
-            user: message.user,
-            chat: message.chat,
-            message: message.message,
-            date: message.date
-          })
-      );
-    }
-
-    return null;
+  async findByDate(date: Date): Promise<Array<Message>> {
+    const dbResult: Array<IMessage> = await this._model.find({ date });
+    return dbResult.map<Message>(
+      message =>
+        new Message({
+          user: message.user,
+          chat: message.chat,
+          message: message.message,
+          date: message.date
+        })
+    );
   }
 
-  async findByUser(user: string): Promise<Array<Message> | null> {
-    const dbResult: Array<IMessage> | null = await this._model.find({ user });
-    if (dbResult != null) {
-      return dbResult.map<Message>(
-        message =>
-          new Message({
-            user: message.user,
-            chat: message.chat,
-            message: message.message,
-            date: message.date
-          })
-      );
-    }
-
-    return null;
+  async findByUser(user: string): Promise<Array<Message>> {
+    const dbResult: Array<IMessage> = await this._model.find({ user });
+    return dbResult.map<Message>(
+      message =>
+        new Message({
+          user: message.user,
+          chat: message.chat,
+          message: message.message,
+          date: message.date
+        })
+    );
   }
 }

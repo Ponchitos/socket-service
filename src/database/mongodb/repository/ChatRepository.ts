@@ -35,22 +35,18 @@ export default class ChatMongoRepository implements IChatRepository {
     );
   }
 
-  async findByUserUuid(userUuid: string): Promise<Array<Chat> | null> {
-    const dbResult: Array<IChat> | null = await this._model.find({ userUuid });
-    if (dbResult != null) {
-      return dbResult.map<Chat>(
-        chat =>
-          new Chat({
-            userUuid: chat.userUuid,
-            name: chat.name,
-            description: chat.description,
-            uuid: chat.uuid,
-            dateCreate: chat.dateCreate
-          })
-      );
-    }
-
-    return null;
+  async findByUserUuid(userUuid: string): Promise<Array<Chat>> {
+    const dbResult: Array<IChat> = await this._model.find({ userUuid });
+    return dbResult.map<Chat>(
+      chat =>
+        new Chat({
+          userUuid: chat.userUuid,
+          name: chat.name,
+          description: chat.description,
+          uuid: chat.uuid,
+          dateCreate: chat.dateCreate
+        })
+    );
   }
 
   async findByUuid(uuid: string): Promise<Chat | null> {

@@ -56,10 +56,8 @@ export default class ChatService {
     return result;
   }
 
-  async findByUserUuid(userUuid: string): Promise<Array<Chat> | null> {
-    const result: Array<Chat> | null = await this._repository.findByUserUuid(
-      userUuid
-    );
+  async findByUserUuid(userUuid: string): Promise<Array<Chat>> {
+    const result: Array<Chat> = await this._repository.findByUserUuid(userUuid);
     this._logger.info({
       action: 'chat service: find chats by user uuid',
       data: userUuid,

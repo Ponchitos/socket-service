@@ -38,10 +38,8 @@ export default class MessageService {
     return message;
   }
 
-  async findByChat(chatUuid: string): Promise<Array<Message> | null> {
-    const result: Array<Message> | null = await this._repository.findByChat(
-      chatUuid
-    );
+  async findByChat(chatUuid: string): Promise<Array<Message>> {
+    const result: Array<Message> = await this._repository.findByChat(chatUuid);
     this._logger.info({
       action: 'message service: find by chat',
       data: chatUuid,
@@ -51,10 +49,8 @@ export default class MessageService {
     return result;
   }
 
-  async findByDate(date: Date): Promise<Array<Message> | null> {
-    const result: Array<Message> | null = await this._repository.findByDate(
-      date
-    );
+  async findByDate(date: Date): Promise<Array<Message>> {
+    const result: Array<Message> = await this._repository.findByDate(date);
     this._logger.info({
       action: 'message service: find by date',
       data: date,
@@ -64,10 +60,8 @@ export default class MessageService {
     return result;
   }
 
-  async findByUser(userUuid: string): Promise<Array<Message> | null> {
-    const result: Array<Message> | null = await this._repository.findByUser(
-      userUuid
-    );
+  async findByUser(userUuid: string): Promise<Array<Message>> {
+    const result: Array<Message> = await this._repository.findByUser(userUuid);
     this._logger.info({
       action: 'message service: find by user uuid',
       data: userUuid,

@@ -4,6 +4,14 @@ import Chat from '../../models/Chat';
 
 const router: express.Router = express.Router();
 
+type ChatResponse = {
+  name: string;
+  user: string;
+  chat: string;
+  description: string;
+  dateCreate: string;
+}
+
 let services: {
   chat: ChatService;
 };
@@ -19,9 +27,11 @@ router.post(
   ): Promise<void> => {
     try {
       const body: IChatReqCreate = req.body as IChatReqCreate;
-      logger.info({ req, action: '/chat/create', data: body });
+      logger.info({ req, action: '/chats/create', data: body });
 
       const result: Chat = await services.chat.create(body);
+
+      logger.info({ req, action: '/chats/create', result });
 
       res.json({
         statusCode: 'OK',
@@ -30,7 +40,7 @@ router.post(
           user: result.userUuid,
           chat: result.uuid,
           description: result.description,
-          dateCreate: result.dateCreate
+          dateCreate: result.dateCreate.toISOString()
         }
       });
     } catch (e) {
@@ -47,12 +57,20 @@ router.get(
     next: express.NextFunction
   ): Promise<void> => {
     try {
-      logger.info({ req, action: '/chat/all' });
-      const result: Array<Chat> = await services.chat.findAll();
+      logger.info({ req, action: '/chats/all' });
+      const chats: Array<Chat> = await services.chat.findAll();
+
+      logger.info({ req, action: '/chats/all', result: chats });
 
       res.json({
         statusCode: 'OK',
-        data: result
+        data: chats.map<ChatResponse>((chat: Chat) => ({
+          name: chat.name,
+          user: chat.userUuid,
+          chat: chat.uuid,
+          description: chat.description,
+          dateCreate: chat.dateCreate.toISOString()
+        }))
       });
     } catch (e) {
       next(e);
@@ -68,26 +86,56 @@ router.get(
     next: express.NextFunction
   ): Promise<void> => {
     try {
-      logger.info({ req, action: '/chat' });
-      const userUuid: string | undefined = req.params.user;
-      const chatUuid: string | undefined = req.params.chat;
+      logger.info({ req, action: '/chats/' });
+      const userUuid: string = req.params.user;
+      const chats: Array<Chat> = await services.chat.findByUserUuid(userUuid);
 
-      let result: Array<Chat> | Chat | null = null;
-
-      if (userUuid != null) {
-        result = await services.chat.findByUserUuid(userUuid);
-      } else if (chatUuid != null) {
-        result = await services.chat.findByUuid(chatUuid);
-      }
+      logger.info({ req, action: '/chats/', result: chats });
 
       res.json({
         statusCode: 'OK',
-        data: result
+        data: chats.map<ChatResponse>((chat: Chat) => ({
+          name: chat.name,
+          user: chat.userUuid,
+          chat: chat.uuid,
+          description: chat.description,
+          dateCreate: chat.dateCreate.toISOString()
+        }))
       });
     } catch (e) {
       next(e);
     }
   }
+);
+
+router.get(
+    '/chat/',
+    async (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ): Promise<void> => {
+      try {
+        logger.info({ req, action: '/chats/chat' });
+        const chatUuid: string = req.params.chat;
+        const chat: Chat | null = await services.chat.findByUuid(chatUuid);
+
+        logger.info({ req, action: '/chats/chat', result: chat });
+
+        res.json({
+          statusCode: 'OK',
+          data: chat == null ? {} : {
+            name: chat.name,
+            user: chat.userUuid,
+            chat: chat.uuid,
+            description: chat.description,
+            dateCreate: chat.dateCreate.toISOString()
+          }
+        });
+      } catch (e) {
+        next(e);
+      }
+    }
 );
 
 export default (chatService: ChatService, settings: any): express.Router => {

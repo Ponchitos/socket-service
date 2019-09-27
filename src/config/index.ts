@@ -4,7 +4,7 @@ export default {
       port: '60982',
       log: {
         dir: './logs/'
-      },
+      }
     },
     jwt: {
       secret: '',
@@ -21,7 +21,7 @@ export default {
       port: '60983',
       log: {
         dir: './logs/'
-      },
+      }
     },
     jwt: {
       secret: '',
@@ -38,7 +38,7 @@ export default {
       port: '60984',
       log: {
         dir: './logs/'
-      },
+      }
     },
     jwt: {
       secret: '',
