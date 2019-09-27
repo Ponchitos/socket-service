@@ -4,12 +4,12 @@ import IUserRepository from '../../api/repositories/UserRepository';
 import IAuthService, {AuthCreateType, ICheckAuthResponse} from '../interface';
 import User from '../../api/models/User';
 
-export interface IConfing {
+export type IConfing = {
   secret: string;
   expiresIn: string;
 }
 
-export interface Interface {
+export type AuthToken = {
   Authorization?: string;
 }
 
@@ -36,7 +36,7 @@ export default class AuthJWTService implements IAuthService {
   }
 
   async checkAuth(req: express.Request): Promise<ICheckAuthResponse> {
-    const cookies: Interface = req.cookies;
+    const cookies: AuthToken = req.cookies;
     if (!cookies) {
       return {
         uuid: null,

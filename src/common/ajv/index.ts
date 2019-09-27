@@ -1,13 +1,13 @@
 import ajv from 'ajv';
 
-interface IRouteValidators {
+type IRouteValidators = {
   request?: object;
   response?: object;
   params?: object;
   headers?: object;
 }
 
-interface IAjvCompilerObj {
+type IAjvCompilerObj = {
   request: ajv.ValidateFunction | null;
   response: ajv.ValidateFunction | null;
   params: ajv.ValidateFunction | null;

@@ -3,12 +3,12 @@ import UserService from '../../services/UserService';
 import User from '../../models/User';
 import IAuthService, {AuthCreateType} from '../../../auth/interface';
 
-interface ISignInRequest {
+type ISignInRequest = {
   email: string;
   password: string;
 }
 
-interface ISignUpRequest {
+type ISignUpRequest = {
   email: string;
   password: string;
   role: string;

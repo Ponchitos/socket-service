@@ -1,6 +1,6 @@
 import uuidv4 from 'uuid/v4';
 
-export interface IChat {
+export type IChat = {
   userUuid: string;
   name: string;
   description: string;

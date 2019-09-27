@@ -1,4 +1,4 @@
-export interface IMessage {
+export type IMessage = {
   user: string;
   chat: string;
   message: string;

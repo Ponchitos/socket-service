@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import uuidv4 from 'uuid/v4';
 
-export interface IUserModel {
+export type IUserModel = {
   email: string;
   role: string;
   password?: string;

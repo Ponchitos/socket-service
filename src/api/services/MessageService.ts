@@ -1,12 +1,12 @@
 import IMessageRepository from '../repositories/MessageRepository';
 import Message from '../models/Message';
 
-export interface IMessageService {
+export type IMessageService = {
   repository: IMessageRepository;
   logger: any;
 }
 
-export interface IMessageReqCreate {
+export type IMessageReqCreate = {
   userUuid: string;
   chatUuid: string;
   message: string;

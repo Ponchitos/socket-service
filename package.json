@@ -17,7 +17,7 @@
     "test:service:user": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/userService.test.js",
     "test:service:chat": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/chatService.test.js",
     "test:service:message": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/messageService.test.js",
-    "test:unit": "npm run test:unit:models && npm run test:db:mongo:user && npm run test:db:mongo:chat && npm run test:db:mongo:message && npm run test:repository:user && npm run test:repository:chat && npm run test:repository:message && docker:db:test:stop",
+    "test:unit": "npm run test:unit:models && npm run test:db:mongo:user && npm run test:db:mongo:chat && npm run test:db:mongo:message && npm run test:repository:user && npm run test:repository:chat && npm run test:repository:message && npm run docker:db:test:stop",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""

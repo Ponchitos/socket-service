@@ -3,7 +3,7 @@ import ActiveRooms from '../../common/room-store';
 import MessageService from '../../api/services/MessageService';
 import Message from '../../api/models/Message';
 
-interface IChatMessage {
+type IChatMessage = {
   room: string;
   user: string;
   msg: string;

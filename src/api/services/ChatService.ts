@@ -1,12 +1,12 @@
 import IChatRepository from '../repositories/ChatRepository';
 import Chat from '../models/Chat';
 
-export interface IChatService {
+export type IChatService = {
   repository: IChatRepository;
   logger: any;
 }
 
-export interface IChatReqCreate {
+export type IChatReqCreate = {
   name: string;
   userUuid: string;
   description: string;

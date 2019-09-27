@@ -1,6 +1,6 @@
 import express from 'express';
 
-export interface ICheckAuthResponse {
+export type ICheckAuthResponse = {
   uuid: string | null;
   auth: boolean;
 }

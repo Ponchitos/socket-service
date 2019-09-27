@@ -1,12 +1,12 @@
 import IUserRepository from '../repositories/UserRepository';
 import User from '../models/User';
 
-export interface IUserService {
+export type IUserService = {
   repository: IUserRepository;
   logger: any;
 }
 
-export interface IUserReqCreate {
+export type IUserReqCreate = {
   email: string;
   password: string;
   role: string;
