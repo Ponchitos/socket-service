@@ -7,14 +7,12 @@ services:
   - docker
 
 before_script:
-  - cd socket-service
-  - chmod +x ./tools/scripts/build/build.sh
   - npm install
-  - npm run build:ts
 
 jobs:
   include:
     - stage: unit test
       script:
+        - npm run build:ts
         - npm run test:unit
 
