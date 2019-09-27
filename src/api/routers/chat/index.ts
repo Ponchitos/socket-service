@@ -138,12 +138,14 @@ router.get(
     }
 );
 
-export default (chatService: ChatService, settings: any): express.Router => {
+export type ChatSettingsType = { chatService: ChatService, settings: any }
+
+export default (data: ChatSettingsType): express.Router => {
   services = {
-    chat: chatService
+    chat: data.chatService
   };
 
-  logger = settings;
+  logger = data.settings;
 
   return router;
 };

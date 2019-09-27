@@ -1,12 +1,12 @@
 import * as jwt from 'jsonwebtoken';
 import express from 'express';
 import IUserRepository from '../../api/repositories/UserRepository';
-import IAuthService, { ICheckAuthResponse } from '../interface';
+import IAuthService, {AuthCreateType, ICheckAuthResponse} from '../interface';
 import User from '../../api/models/User';
 
 export interface IConfing {
   secret: string;
-  expiresIn: number;
+  expiresIn: string;
 }
 
 export interface Interface {
@@ -22,16 +22,17 @@ export default class AuthJWTService implements IAuthService {
     this._config = config;
   }
 
-  authCreate(res: express.Response, uuid: string): express.Response {
+  authCreate(uuid: string): AuthCreateType {
     const token: string = jwt.sign({ uuid }, this._config.secret, {
       expiresIn: this._config.expiresIn
     });
-    res.setHeader(
-      'Set-Cookie',
-      `Authorization=${token}; HttpOnly; Max-Age=${this._config.expiresIn}`
-    );
 
-    return res;
+    const exp: string = this._config.expiresIn;
+
+    return {
+      token,
+      exp
+    };
   }
 
   async checkAuth(req: express.Request): Promise<ICheckAuthResponse> {

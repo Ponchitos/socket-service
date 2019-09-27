@@ -8,7 +8,7 @@ export default {
     },
     jwt: {
       secret: '',
-      expiresIn: 0
+      expiresIn: ''
     },
     mongodb: {
       uri: 'localhost',
@@ -25,7 +25,7 @@ export default {
     },
     jwt: {
       secret: '',
-      expiresIn: 0
+      expiresIn: ''
     },
     mongodb: {
       uri: 'localhost',
@@ -42,7 +42,7 @@ export default {
     },
     jwt: {
       secret: '',
-      expiresIn: 0
+      expiresIn: ''
     },
     mongodb: {
       uri: 'localhost',

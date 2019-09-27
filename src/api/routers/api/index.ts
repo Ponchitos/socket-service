@@ -1,7 +1,7 @@
 import express from 'express';
 import UserService from '../../services/UserService';
 import User from '../../models/User';
-import IAuthService from '../../../auth/interface';
+import IAuthService, {AuthCreateType} from '../../../auth/interface';
 
 interface ISignInRequest {
   email: string;
@@ -84,30 +84,36 @@ router.post(
         throw new Error('Not valid login data');
       }
 
-      res = services.auth.authCreate(res, user.uuid);
+      const authData: AuthCreateType = services.auth.authCreate(user.uuid);
 
-      if (user.role === 'client') {
-        res.redirect(`/chats/&userUuid=${user.uuid}`);
-      }
-
-      res.redirect('/chats/all/');
+      res.json({
+        statusCode: 'OK',
+        data: {
+          client: {
+            uuid: user.uuid,
+            role: user.role
+          },
+          auth: {
+            token: authData.token,
+            exp: authData.exp
+          }
+        }
+      });
     } catch (e) {
       next(e);
     }
   }
 );
 
-export default (
-  userService: UserService,
-  authService: IAuthService,
-  settings: any
-): express.Router => {
+export type ApiSettingsType = { userService: UserService, authService: IAuthService, settings: any }
+
+export default (data: ApiSettingsType): express.Router => {
   services = {
-    user: userService,
-    auth: authService
+    user: data.userService,
+    auth: data.authService
   };
 
-  logger = settings;
+  logger = data.settings;
 
   return router;
 };

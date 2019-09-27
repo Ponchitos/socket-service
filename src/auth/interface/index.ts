@@ -5,7 +5,9 @@ export interface ICheckAuthResponse {
   auth: boolean;
 }
 
+export type AuthCreateType = { token: string, exp: string }
+
 export default interface IAuthService {
-  authCreate(req: express.Response, uuid: string): express.Response;
+  authCreate(uuid: string): AuthCreateType;
   checkAuth(res: express.Request): Promise<ICheckAuthResponse>;
 }

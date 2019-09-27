@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:ts": "./tools/scripts/build/build.sh",
     "docker:db:test:start": "./tools/scripts/docker/docker-mongodb-test-start.sh",
     "docker:db:test:stop": "./tools/scripts/docker/docker-mongodb-test-stop.sh",
     "test:db:mongo:user": "npm run docker:db:test:stop && npm run docker:db:test:start && npm run test:repository:user",
@@ -16,7 +17,7 @@
     "test:service:user": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/userService.test.js",
     "test:service:chat": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/chatService.test.js",
     "test:service:message": "npm run docker:db:test:stop && npm run docker:db:test:start && jest build/__tests__/unit/service/messageService.test.js",
-    "test:unit": "npm run test:unit:models && npm run test:db:mongo:user && npm run test:db:mongo:chat && npm run test:db:mongo:message && npm run test:repository:user && npm run test:repository:chat && npm run test:repository:message",
+    "test:unit": "npm run test:unit:models && npm run test:db:mongo:user && npm run test:db:mongo:chat && npm run test:db:mongo:message && npm run test:repository:user && npm run test:repository:chat && npm run test:repository:message && docker:db:test:stop",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
@@ -28,6 +29,7 @@
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "debug": "^4.1.1",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "helmet": "^3.21.1",
     "jsonwebtoken": "^8.5.1",
@@ -42,6 +44,7 @@
     "@types/bcrypt": "^3.0.0",
     "@types/body-parser": "^1.17.1",
     "@types/debug": "^4.1.5",
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^4.17.1",
     "@types/helmet": "0.0.44",
     "@types/jest": "^24.0.18",

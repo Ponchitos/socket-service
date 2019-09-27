@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import responseTime from 'response-time';
 import debug from 'debug';
 import socket from 'socket.io';
+import http from 'http';
 
 import logger from './logger/winston';
 
@@ -31,6 +32,11 @@ import ajvCompiler, { ISchemaValidators } from './common/ajv';
 
 import config from './config';
 
+import ApiRouter, { ApiSettingsType } from "./api/routers/api";
+import ChatRouter, { ChatSettingsType } from "./api/routers/chat";
+
+require('dotenv').config();
+
 const ENVIRONMENT: 'test' | 'stage' | 'prod' =
   (process.env.NODE_ENV as 'test' | 'stage' | 'prod') || 'test';
 
@@ -47,7 +53,7 @@ config[ENVIRONMENT].jwt.secret =
   process.env.JWT_SECRET || config[ENVIRONMENT].jwt.secret;
 config[ENVIRONMENT].jwt.expiresIn =
   process.env.JWT_EXPIRES != null
-    ? parseInt(process.env.JWT_EXPIRES)
+    ? process.env.JWT_EXPIRES
     : config[ENVIRONMENT].jwt.expiresIn;
 
 const debugFatal: debug.Debugger = debug('FATAL');
@@ -60,7 +66,7 @@ interface ISchema {
 
 const schemas: ISchema = {
   api: require('./api/schemas/api.schema.json'),
-  chat: require('./api/schemas/chat.schema.json')
+  chat: require('./api/schemas/chats.schema.json')
 };
 
 const schemaValidator: ISchemaValidators = ajvCompiler(ajvExample, schemas, 3);
@@ -92,6 +98,9 @@ const services = {
   }),
   auth: new AuthJWTService(repositories.user, config[ENVIRONMENT].jwt)
 };
+
+const apiData: ApiSettingsType = { userService: services.user, authService: services.auth, settings: logger };
+const chatsData: ChatSettingsType = { chatService: services.chat, settings: logger };
 
 const socketService = new SocketIOService(services.message);
 const socketActiveRooms = new ActiveRooms();
@@ -138,12 +147,15 @@ application.use(
 
 application.use(
   '/api/',
-  require('./api/routers/api')(services.user, services.auth, logger)
+  ApiRouter({ ...apiData })
 );
 
 application.use(services.auth.checkAuth);
 
-application.use('/chats/', require('./api/routers/chat')(services.chat, logger));
+application.use(
+  '/chats/',
+  ChatRouter({ ...chatsData })
+);
 
 application.use(
   async (
@@ -187,14 +199,15 @@ application.use(
   }
 );
 
-application.listen(
+const server = new http.Server(application);
+server.listen(
   APP_PORT,
   async (): Promise<void> => {
     logger.info(`[${ENVIRONMENT}] listening on port ${APP_PORT}`);
   }
 );
 
-const io: socket.Server = socket(application);
+const io: socket.Server = socket(server);
 
 io.on('connection', (socket: socket.Socket) => {
   socketService.client(socket, socketActiveRooms);

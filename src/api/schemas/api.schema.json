@@ -57,6 +57,47 @@
         },
         "required": ["email", "password"],
         "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "client": {
+                "type": "object",
+                "properties": {
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  }
+                },
+                "required": ["uuid", "role"],
+                "additionalProperties": false
+              },
+              "auth": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "exp": {
+                    "type": "string"
+                  }
+                },
+                "required": ["token", "exp"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["statusCode", "data"],
+            "additionalProperties": false
+          }
+        }
       }
     }
   }
